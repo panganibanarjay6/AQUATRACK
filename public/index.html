@@ -1,0 +1,2559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaTrack ERP | Water Refilling Station Management</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="side">
+  <div class="brand">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2C12 2 5 10 5 15a7 7 0 0 0 14 0c0-5-7-13-7-13Z" fill="#fff" opacity=".95"/>
+        <path d="M9.5 15.5c0 2 1.2 3.2 3 3.4" stroke="#0ea5e9" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div>
+      <h1>AquaTrack</h1>
+      <span>ERP System</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="navlabel">Main</div>
+    <div class="navitem active" data-view="dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="3" y="3" width="7" height="9" rx="1.5"/>
+        <rect x="14" y="3" width="7" height="5" rx="1.5"/>
+        <rect x="14" y="12" width="7" height="9" rx="1.5"/>
+        <rect x="3" y="16" width="7" height="5" rx="1.5"/>
+      </svg>
+      <span>Dashboard</span>
+    </div>
+
+    <div class="navlabel">Modules</div>
+    <div class="navitem" data-view="procurement">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 6h18M3 6l2 12h14l2-12M9 10h6"/>
+      </svg>
+      <span>Procurement</span>
+      <i class="tag">2</i>
+    </div>
+
+    <div class="navitem" data-view="inventory">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 7l9-4 9 4-9 4-9-4Z"/>
+        <path d="M3 12l9 4 9-4M3 17l9 4 9-4"/>
+      </svg>
+      <span>Inventory</span>
+      <i class="tag">3</i>
+    </div>
+
+    <div class="navitem" data-view="production">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/>
+      </svg>
+      <span>Production</span>
+    </div>
+
+    <div class="navitem" data-view="sales">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6"/>
+        <circle cx="10" cy="21" r="1"/>
+        <circle cx="18" cy="21" r="1"/>
+      </svg>
+      <span>Sales &amp; CRM</span>
+    </div>
+
+    <div class="navitem" data-view="finance">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="2" y="5" width="20" height="14" rx="2"/>
+        <path d="M2 10h20"/>
+      </svg>
+      <span>Finance</span>
+    </div>
+
+    <div class="navitem" data-view="hr">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="9" cy="8" r="3.5"/>
+        <path d="M2.5 20c.7-3.4 3.4-5.5 6.5-5.5s5.8 2.1 6.5 5.5"/>
+        <circle cx="17.5" cy="9" r="2.5"/>
+        <path d="M16.5 14.6c2.7.3 4.6 2.1 5 5.4"/>
+      </svg>
+      <span>HR &amp; Payroll</span>
+    </div>
+
+    <div class="navlabel">System</div>
+    <div class="navitem" data-view="reports">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>
+      </svg>
+      <span>Reports &amp; Analytics</span>
+    </div>
+
+    <div class="navitem" data-view="audit">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10Z"/>
+        <path d="m9 11.5 2 2 4-4.5"/>
+      </svg>
+      <span>Audit Trail</span>
+    </div>
+  </nav>
+
+  <div class="sidefoot">
+    <div class="avatar">CM</div>
+    <div><b>Cassandra M.</b>
+      <small>ERP Administrator</small>
+    </div>
+  </div>
+</aside>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+  <header class="topbar">
+    <div class="crumb">
+      <b id="crumbTitle">Executive Dashboard</b>AquaTrack Water Refilling Station</div>
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m20 20-3.5-3.5"/>
+      </svg>
+      <input placeholder="Search modules, orders, items...">
+    </div>
+
+    <div class="iconbtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M10.3 21a2 2 0 0 0 3.4 0"/>
+      </svg>
+      <i class="dot">
+      </i>
+    </div>
+
+    <div class="iconbtn" id="themeBtn" title="Toggle light / dark theme">
+      <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>
+      </svg>
+      <svg id="iconSun" style="display:none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+      </svg>
+    </div>
+  </header>
+
+  <div class="content">
+
+  <!-- ======== DASHBOARD ======== -->
+  <section class="view active" id="view-dashboard">
+    <div class="pagehead">
+      <div>
+        <h2>Executive Dashboard</h2>
+        <p>One ERP, five modules, one database. Live overview for Sunday, Sep 27, 2026.</p>
+      </div>
+
+      <button class="btn primary" style="margin-left:auto" onclick="toast('Report export queued for PDF generation')">Export Daily Report</button>
+    </div>
+    <div class="grid g4" style="margin-bottom:16px">
+      <div class="card kpi">
+        <div class="top">
+          <h3>Today's Sales</h3>
+          <div class="ic green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 17l6-6 4 4 7-7"/>
+              <path d="M14 8h6v6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">&#8369;18,450</div>
+        <span class="badge b-ok">+12.4% vs yesterday</span>
+      </div>
+
+      <div class="card kpi">
+        <div class="top">
+          <h3>Gallons Produced</h3>
+          <div class="ic blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2S5 10 5 15a7 7 0 0 0 14 0c0-5-7-13-7-13Z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="val">1,860</div>
+        <span class="badge b-blue">3 production runs active</span>
+      </div>
+
+      <div class="card kpi">
+        <div class="top">
+          <h3>Low Stock Alerts</h3>
+          <div class="ic amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 9v4M12 17h.01"/>
+              <path d="M10.3 3.9 2.5 18a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">3</div>
+        <span class="badge b-warn">2 at reorder level</span>
+      </div>
+      
+      <div class="card kpi">
+        <div class="top">
+          <h3>Receivables</h3>
+          <div class="ic red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <path d="M2 10h20"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">&#8369;42,300</div>
+        <span class="badge b-bad">6 overdue invoices</span>
+      </div>
+    </div>
+
+    <div class="split" style="margin-bottom:16px">
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Weekly Sales Performance</h3>
+          <span class="badge b-dim">Refills + Bottled</span>
+        </div>
+
+        <div class="bars">
+          <div class="bar">
+            <div class="fill" style="height:52%"></div>
+            <small>Mon</small>
+          </div>
+
+          <div class="bar">
+            <div class="fill" style="height:64%"></div>
+            <small>Tue</small>
+          </div>
+
+          <div class="bar">
+            <div class="fill" style="height:48%"></div>
+            <small>Wed</small>
+          </div>
+
+          <div class="bar">
+            <div class="fill" style="height:71%"></div>
+            <small>Thu</small>
+          </div>
+
+          <div class="bar">
+            <div class="fill warn" style="height:88%"></div>
+            <small>Fri</small>
+          </div>
+
+          <div class="bar">
+            <div class="fill" style="height:95%"></div>
+            <small>Sat</small>
+          </div>
+
+          <div class="bar">
+            <div class="fill" style="height:58%"></div>
+            <small>Sun</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Order Status Mix</h3>
+        </div>
+
+        <div class="donut">
+          <div class="hole">
+            <div>
+              <b>142</b>
+              <br>
+              <small class="dim">active orders</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend" style="margin-top:14px">
+          <span>
+            <i style="background:var(--ok)"></i>Delivered &nbsp;62%
+          </span>
+
+          <span>
+            <i style="background:var(--aqua)"></i>In Production &nbsp;22%
+          </span>
+
+          <span>
+            <i style="background:var(--warn)"></i>Backorder &nbsp;12%
+          </span>
+
+          <span>
+            <i style="background:var(--bad)"></i>Cancelled &nbsp;4%
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="card">
+        <div class="cardtitle">
+          <h3>End-to-End Transaction Flow</h3>
+          <a class="link">View full workflow</a>
+        </div>
+
+        <div class="flow" style="margin-bottom:14px">
+          <div class="modnode" style="border-color:rgba(45,212,255,.5)">Procurement
+            <small>PO-1042</small>
+          </div>
+          <span class="arrow">&#8594;</span>
+
+          <div class="modnode" style="border-color:rgba(45,212,255,.5)">Inventory
+            <small>GRN-0871</small>
+          </div>
+          <span class="arrow">&#8594;</span>
+
+          <div class="modnode" style="border-color:rgba(45,212,255,.5)">Production
+            <small>PRO-0219</small>
+          </div>
+          <span class="arrow">&#8594;</span>
+
+          <div class="modnode" style="border-color:rgba(45,212,255,.5)">Sales
+            <small>SO-1338</small>
+          </div>
+          <span class="arrow">&#8594;</span>
+
+          <div class="modnode" style="border-color:rgba(45,212,255,.5)">Finance
+            <small>INV-0912</small>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <b>Raw water + gallons received</b> 
+            <span class="badge b-ok" style="margin-left:6px">GRN-0871 posted</span>
+            <br>
+            <small class="mut">Stock IN auto-created from goods receipt &middot; Procurement &#8594; Inventory</small>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <b>Purification run in progress</b>
+            <span class="badge b-blue" style="margin-left:6px">PRO-0219 &middot; 64%</span>
+            <br>
+            <small class="mut">1,200 of 1,860 gallons completed &middot; materials issued from stock</small>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <b>Finished goods queued for delivery</b>
+            <span class="badge b-warn" style="margin-left:6px">stock check pending</span>
+            <br>
+            <small class="mut">SO-1338 awaiting available stock before delivery &middot; Sales &#8594; Inventory</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Module Health</h3>
+          <a class="link">Team status</a>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:15px">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+              <span>Team 1 &middot; Procurement</span>
+              <span class="b-ok badge">Online</span>
+            </div>
+            <div class="progress">
+              <i style="width:92%"></i>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+              <span>Team 2 &middot; Inventory</span>
+              <span class="b-ok badge">Online</span>
+            </div>
+            <div class="progress">
+              <i style="width:88%"></i>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+              <span>Team 3 &middot; Production</span>
+              <span class="b-blue badge">Syncing</span>
+            </div>
+            <div class="progress">
+              <i style="width:74%"></i>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+              <span>Team 4 &middot; Sales</span>
+              <span class="b-ok badge">Online</span>
+            </div>
+            <div class="progress">
+              <i style="width:95%"></i>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+              <span>Team 5 &middot; Finance &amp; HR</span>
+              <span class="b-warn badge">2 entries pending</span>
+            </div>
+            <div class="progress">
+              <i style="width:81%"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== PROCUREMENT ======== -->
+  <section class="view" id="view-procurement">
+    <div class="pagehead">
+      <div>
+        <h2>Procurement &amp; Purchasing</h2>
+        <p>Team 1 module &middot; feeds Inventory (goods receipt) and Finance (accounts payable)</p>
+      </div>
+      <button class="btn primary" onclick="toast('New purchase request drafted')">+ Purchase Request</button>
+    </div>
+
+    <div class="grid g4" style="margin-bottom:16px">
+      <div class="card kpi">
+        <div class="top">
+          <h3>Open POs</h3>
+          <div class="ic blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2h9l5 5v15H6z"/>
+              <path d="M14 2v6h6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">14</div>
+        <span class="badge b-blue">&#8369;86,200 committed</span>
+      </div>
+
+      <div class="card kpi">
+        <div class="top">
+          <h3>Awaiting RFQ</h3>
+          <div class="ic purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 1-1 1.7"/>
+              <path d="M12 17h.01"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">5</div>
+        <span class="badge b-purple">3 suppliers quoted</span>
+      </div>
+
+      <div class="card kpi">
+        <div class="top">
+          <h3>Due for Receiving</h3>
+          <div class="ic amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 8 12 3 3 8v12h18V8Z"/>
+              <path d="m3 8 9 5 9-5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">4</div>
+        <span class="badge b-warn">this week</span>
+      </div>
+
+      <div class="card kpi">
+        <div class="top">
+          <h3>AP from Purchases</h3>
+          <div class="ic red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">&#8369;51,750</div>
+        <span class="badge b-bad">2 unpaid invoices</span>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="cardtitle">
+        <h3>Purchase Orders</h3>
+        <div>
+          <button class="btn" onclick="toast('Filters applied')">Filter</button>
+          <button class="btn primary" onclick="toast('PO-1055 created in draft')">New PO</button>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>PO No.</th>
+            <th>Supplier</th>
+            <th>Items</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Linked Flow</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="mono">PO-1042</td>
+            <td>AquaPure Bottles Inc.</td>
+            <td>2,000 empty 5-gal gallons</td>
+            <td>&#8369;48,000</td>
+            <td>
+              <span class="badge b-ok">Received</span>
+            </td>
+            <td>
+              <small class="mut">GRN-0871 &#8594; Stock IN</small>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="mono">PO-1043</td>
+            <td>ClearSeal Caps Corp.</td>
+            <td>10,000 bottle caps</td>
+            <td>&#8369;6,500</td>
+            <td>
+              <span class="badge b-blue">In Transit</span>
+            </td>
+            <td>
+              <small class="dim">awaiting goods receipt</small>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="mono">PO-1044</td>
+            <td>LabelCraft Printing</td>
+            <td>5,000 product labels</td>
+            <td>&#8369;4,200</td>
+            <td>
+              <span class="badge b-blue">In Transit</span>
+            </td>
+            <td>
+              <small class="dim">awaiting goods receipt</small>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="mono">PO-1045</td>
+            <td>FilterTech Supplies</td>
+            <td>RO membrane set</td>
+            <td>&#8369;27,500</td>
+            <td>
+              <span class="badge b-warn">Awaiting Approval</span>
+            </td>
+            <td>
+              <small class="dim">RFQ from 3 suppliers</small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ======== INVENTORY ======== -->
+  <section class="view" id="view-inventory">
+    <div class="pagehead">
+      <div>
+        <h2>Inventory &amp; Warehouse</h2>
+        <p>Team 2 module &middot; receives from Procurement, serves Production and Sales</p>
+      </div>
+      <button class="btn primary" onclick="toast('Stock adjustment form opened')">+ Stock Adjustment</button>
+    </div>
+
+    <div class="split" style="margin-bottom:16px">
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Stock Levels &middot; Reorder Monitoring</h3>
+          <a class="link">Full stock cards</a>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Type</th>
+              <th>On Hand</th>
+              <th>Reorder Level</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <b>Purified Water (raw)</b>
+              </td>
+              <td>
+                <span class="badge b-dim">Raw material</span>
+              </td>
+              <td>4,200 L</td>
+              <td>1,000 L</td>
+              <td>
+                <span class="badge b-ok">Healthy</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>Empty 5-gal gallons</b>
+              </td>
+              <td>
+                <span class="badge b-dim">Raw material</span>
+              </td>
+              <td>340</td>
+              <td>500</td>
+              <td>
+                <span class="badge b-bad">Below reorder</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>Bottle caps</b>
+              </td>
+              <td>
+                <span class="badge b-dim">Raw material</span>
+              </td>
+              <td>1,150</td>
+              <td>1,000</td>
+              <td>
+                <span class="badge b-warn">Near reorder</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>Refilled 5-gal (finished)</b>
+              </td>
+              <td>
+                <span class="badge b-blue">Finished goods</span>
+              </td>
+              <td>612</td>
+              <td>300</td>
+              <td>
+                <span class="badge b-ok">Healthy</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>500 mL bottled cases</b>
+              </td>
+              <td>
+                <span class="badge b-blue">Finished goods</span>
+              </td>
+              <td>88</td>
+              <td>120</td>
+              <td>
+                <span class="badge b-warn">Near reorder</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Today's Stock Movements</h3>
+        </div>
+
+        <div class="step">
+          <div class="num">+</div>
+          <div>
+            <b>Stock IN</b> 
+            &middot; GRN-0871
+            <br>
+            <small class="mut">2,000 gallons from PO-1042 received</small>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">&#8722;</div>
+          <div>
+            <b>Stock OUT</b>
+             &middot; Material Issue MI-0338
+             <br>
+             <small class="mut">1,860 gallons issued to Production PRO-0219</small>
+            </div>
+          </div>
+
+        <div class="step">
+          <div class="num">+</div>
+          <div
+          ><b>Finished Goods IN</b>
+           &middot; PRO-0219
+           <br>
+           <small class="mut">1,200 refilled gallons returned to warehouse</small>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">&#8722;</div>
+          <div>
+            <b>Stock OUT</b> 
+            &middot; Delivery D-0662
+            <br>
+            <small class="mut">84 refilled gallons delivered to 6 customers</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardtitle">
+        <h3>Low Stock Alerts</h3>
+        <span class="badge b-bad">2 items require action</span>
+      </div>
+      
+      <div class="alertrow">
+        <div class="ic red">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.3 3.9 2.5 18a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
+            <path d="M12 9v4M12 17h.01"/>
+          </svg>
+        </div>
+        <div style="flex:1">
+          <b>Empty 5-gal gallons below reorder level (340 / 500)</b>
+          <small>Suggested action: create Purchase Request to AquaPure Bottles Inc. &middot; links to Procurement module</small>
+        </div>
+        <button class="btn" onclick="toast('Purchase request PR-0231 drafted automatically')">Draft PR</button>
+      </div>
+
+      <div class="alertrow">
+        <div class="ic amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.3 3.9 2.5 18a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
+            <path d="M12 9v4M12 17h.01"/>
+          </svg>
+        </div>
+        <div style="flex:1">
+          <b>500 mL bottled cases near reorder (88 / 120)</b>
+          <small>Sales demand trending up; production planning recommended this week</small>
+        </div>
+        <button class="btn" onclick="toast('Sent to Production planning queue')">Plan Production</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== PRODUCTION ======== -->
+  <section class="view" id="view-production">
+  <div id="prod-hub">
+ <div class="pagehead">
+  <div>
+    <h2>Production &amp; Manufacturing</h2>
+    <p>Team 3 module &middot; consumes raw materials from Inventory, sends costing to Finance</p>
+  </div>
+</div>
+
+ <div class="kpisq">
+ <div class="card kpi">
+  <div class="top">
+    <h3>Active Orders</h3>
+  </div>
+
+  <div class="val">3</div>
+  <span class="badge b-blue">2 shifts scheduled</span>
+</div>
+
+ <div class="card kpi">
+  <div class="top">
+    <h3>Unit Today</h3>
+  </div>
+
+  <div class="val">1,860</div>
+  <span class="badge b-ok">98.2% yield</span>
+</div>
+
+ <div class="card kpi">
+  <div class="top">
+    <h3>Unit Cost</h3>
+  </div>
+
+  <div class="val">&#8369;9.80</div>
+  <span class="badge b-purple">per gallon</span>
+</div>
+
+ <div class="card kpi">
+  <div class="top">
+    <h3>Machine Status</h3>
+  </div>
+  <div class="val">2/3</div>
+      <span class="badge b-warn">1 under maintenance</span>
+    </div>
+</div>
+
+ <div class="hubtitle">Required Features</div>
+ <div class="ptiles">
+  <button class="ptile" onclick="openFeature(1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 7l9-4 9 4-9 4-9-4Z"/>
+      <path d="M3 7v10l9 4 9-4V7"/>
+      <path d="M12 11v10"/>
+    </svg>
+    <span>
+      <b>Product Master</b>
+      <small>Item registry &amp; pricing</small>
+    </span>
+  </button>
+
+  <button class="ptile" onclick="openFeature(2)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2h9l5 5v15H6z"/>
+      <path d="M14 2v6h6M9 13h7M9 17h7"/>
+    </svg>
+    <span>
+      <b>Bill of Materials (BOM)</b>
+      <small>Components per product</small>
+    </span>
+  
+  </button>
+  <button class="ptile" onclick="openFeature(3)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="3" width="16" height="18" rx="2"/>
+      <path d="M8 8h8M8 12h8M8 16h5"/>
+    </svg>
+    
+    <span>
+      <b>Production Order</b>
+      <small>Active runs &amp; stages</small>
+    </span>
+  </button>
+  
+  <button class="ptile" onclick="openFeature(4)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="17" rx="2"/>
+      <path d="M8 2v4M16 2v4M3 10h18"/>
+    </svg>
+    <span>
+      <b>Production Planning</b>
+      <small>Schedule &amp; calendar</small>
+    </span>
+  </button>
+  <button class="ptile" onclick="openFeature(5)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 6h18M3 6l2 12h14l2-12M9 10h6"/>
+    </svg>
+
+    <span>
+      <b>Material Requirement</b>
+      <small>Request raw materials</small>
+    </span>
+  </button>
+  
+  <button class="ptile" onclick="openFeature(6)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 8 12 3 3 8v12h18V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg><span><b>Material Issuance</b><small>Stock out to production</small></span></button><button class="ptile" onclick="openFeature(7)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span><b>Production Monitoring</b><small>Live tracking &amp; machines</small></span></button><button class="ptile" onclick="openFeature(8)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 12 3 4 7v10l8 4 8-4V7Z"/><path d="m9 12 2 2 4-4"/></svg><span><b>Finished Goods</b><small>Output recorded to stock</small></span></button><button class="ptile" onclick="openFeature(9)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"/></svg><span><b>Production Costing</b><small>Material, labor &amp; machine</small></span></button><button class="ptile" onclick="openFeature(10)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span><b>Production Reports</b><small>Summaries &amp; exports</small></span></button></div>
+</div>
+  <div class="pf" id="pf-1">
+    <div class="pfbar">
+      <button class="btn" onclick="prodHome()">&#8592; Production</button>
+      <span class="pfcrumb">Production &amp; Manufacturing &rsaquo;
+         <b>Product Master</b>
+        </span>
+      </div>
+
+<div class="pagehead">
+  <div>
+    <h2>Product Master</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="toast('New product form opened')">+ Add Product</button>
+  </div>
+</div>
+<div class="card">
+  <div class="fbar">
+    <div class="fsearch">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m20 20-3.5-3.5"/>
+      </svg>
+      <input class="tsearch" data-t="t-pm" placeholder="Search product...">
+    </div>
+    <select class="tsel" data-t="t-pm" data-col="2">
+      <option>All Categories</option>
+      <option>Drinking Water</option>
+      <option>Bottled</option>
+    </select>
+  </div>
+  <table id="t-pm">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Unit</th>
+        <th>Price</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="mono">PRD-001</span>
+        </td>
+        <td>5-gal Refill Water</td>
+        <td>Drinking Water</td>
+        <td>5 gal</td>
+        <td>&#8369;9.80</td>
+        <td>
+          <span class="badge b-ok">Active</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">PRD-002</span>
+        </td>
+        <td>50 ml Bottled Water</td>
+        <td>Bottled</td>
+        <td>50 ml</td>
+        <td>&#8369;6.50</td>
+        <td>
+          <span class="badge b-ok">Active</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="mono">PRD-003</span>
+        </td>
+        <td>1 L Bottled Water</td>
+        <td>Bottled</td>
+        <td>1 L</td>
+        <td>&#8369;12.00</td>
+        <td>
+          <span class="badge b-ok">Active</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="mono">PRD-004</span>
+        </td>
+        <td>500 ml Bottled Water</td>
+        <td>Bottled</td>
+        <td>500 ml</td>
+        <td>&#8369;10.00</td>
+        <td>
+          <span class="badge b-ok">Active</span>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <span class="mono">PRD-005</span>
+        </td>
+        <td>20 L Refill Water</td>
+        <td>Drinking Water</td>
+        <td>20 L</td>
+        <td>&#8369;35.00</td>
+        <td>
+          <span class="badge b-bad">Inactive</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pager">
+    <small class="dim">Showing 1&ndash;5 of 5</small>
+    <div class="pg">
+      <button class="pgb">&lsaquo;</button>
+      <button class="pgb on">1</button>
+      <button class="pgb">&rsaquo;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="pf" id="pf-2">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo;
+       <b>Bill of Materials (BOM)</b>
+      </span>
+    </div>
+
+ <div class="pagehead">
+  <div>
+    <h2>Bill of Materials (BOM)</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="toast('BOM editor opened')">+ New BOM</button>
+  </div>
+</div>
+<div class="card">
+  <div class="fbar">
+    <div class="fsearch">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m20 20-3.5-3.5"/>
+      </svg>
+      <input class="tsearch" data-t="t-bom" placeholder="Search BOM...">
+    </div>
+    <select class="tsel" data-t="t-bom" data-col="1">
+      <option>All Products</option>
+      <option>5-gal Refill Water</option>
+      <option>50 ml Bottled</option>
+      <option>1 L Bottled</option>
+    </select>
+  </div>
+  <table id="t-bom">
+    <thead>
+      <tr>
+        <th>BOM ID</th>
+        <th>Product</th>
+        <th>Materials</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <span class="mono">BOM-001</span>
+        </td>
+        <td>5-gal Refill Water</td>
+        <td>
+          <ul class="mlist">
+            <li>Water (treated)</li>
+            <li>Empty 5-gal gallon</li>
+            <li>Bottle cap</li>
+            <li>Product label</li>
+          </ul>
+        </td>
+        <td>
+          <span class="badge b-ok">Active</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">BOM-002</span>
+        </td>
+        <td>50 ml Bottled</td>
+        <td>
+          <ul class="mlist">
+            <li>Bottle</li>
+            <li>Cap</li>
+            <li>Label</li>
+          </ul>
+        </td>
+        <td>
+          <span class="badge b-ok">Active</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">BOM-003</span>
+        </td>
+        <td>1 L Bottled</td>
+        <td>
+          <ul class="mlist">
+            <li>Bottle</li>
+            <li>Cap</li>
+            <li>Label</li>
+          </ul>
+        </td>
+        <td>
+          <span class="badge b-ok">Active</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pager">
+    <small class="dim">Showing 1&ndash;3 of 3</small>
+    <div class="pg">
+      <button class="pgb">&lsaquo;</button>
+      <button class="pgb on">1</button>
+      <button class="pgb">&rsaquo;</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="pf" id="pf-3">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo; 
+      <b>Production Order</b>
+    </span>
+  </div>
+ 
+ <div class="pagehead">
+  <div>
+    <h2>Production Order</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="toast('New production order created')">+ Production Order</button>
+  </div>
+</div>
+<div class="card" style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:14px 16px">
+  <span style="font-size:12px;color:var(--muted)">Order actions</span>
+  <select id="poSelect" class="tsel" style="min-width:240px"></select>
+  <button class="btn" id="poStart">Start</button>
+  <button class="btn" id="poAdvance">Advance stage</button>
+  <button class="btn" id="poOutput">Record output</button>
+  <button class="btn primary" id="poComplete">Complete</button>
+  <button class="btn" id="poCancel">Cancel</button>
+</div>
+<div class="split">
+  <div class="card">
+    <div class="cardtitle">
+      <h3>Production Order</h3>
+    </div>
+    <table id="t-po">
+      <thead>
+        <tr>
+          <th>Order</th>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Progress</th>
+          <th>Stage</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>
+            <span class="mono">PRO-0219</span>
+          </td>
+          <td>5-gal Refill Water</td>
+          <td>1,860</td>
+          <td>
+            <div class="progress" style="width:130px">
+              <i style="width:64%"></i>
+            </div>
+          </td>
+          <td>
+            <span class="badge b-blue">Purifying</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="mono">PRO-0220</span>
+          </td>
+          <td>50 ml Bottled (Cases)</td>
+          <td>200</td>
+          <td>
+            <div class="progress" style="width:130px">
+              <i style="width:41%"></i>
+            </div>
+          </td>
+          <td>
+            <span class="badge b-blue">Bottling</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="mono">PRO-0221</span>
+          </td>
+          <td>5-gal Refill Water</td>
+          <td>900</td>
+          <td>
+            <div class="progress" style="width:130px">
+              <i style="width:0%"></i>
+            </div>
+          </td>
+          <td>
+            <span class="badge b-warn">Material request pending</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="cardtitle">
+      <h3>Bill of Materials 5-gal Refill</h3>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:12.5px">
+ 
+ <div style="display:flex;justify-content:space-between">
+  <span>Purified Water (treated)</span>
+  <span class="mut">20 L</span>
+</div>
+
+ <div style="display:flex;justify-content:space-between">
+  <span>Empty 5-gal gallon</span>
+  <span class="mut">1 unit</span>
+</div>
+
+ <div style="display:flex;justify-content:space-between">
+  <span>Bottle cap</span>
+  <span class="mut">1 unit</span>
+</div>
+
+ <div style="display:flex;justify-content:space-between">
+  <span>Product label</span>
+  <span class="mut">1 unit</span>
+</div>
+
+ <div style="border-top:1px solid var(--line);padding-top:12px">
+  <div style="display:flex;justify-content:space-between">
+    <b>Unit cost to Finance</b>
+    <b style="color:var(--aqua)">&#8369;9.80</b>
+  </div>
+  <small class="dim">Auto-posted to cost accounting on order completion</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="pf" id="pf-4">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo; 
+      <b>Production Planning</b>
+    </span>
+  </div>
+
+<div class="pagehead">
+  <div>
+    <h2>Production Planning</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="toast('Production run added to schedule')">+ Create Plan</button>
+  </div>
+</div>
+<div class="card" style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:14px 16px">
+  <span style="font-size:12px;color:var(--muted)">Plan actions</span>
+  <select id="planSelect" class="tsel" style="min-width:240px"></select>
+  <button class="btn primary" id="planConvert">Convert to Order</button>
+</div>
+
+<div class="plan">
+  <div class="card">
+    <div class="cal">
+      <div class="calhead">
+        <button class="pgb">&lsaquo;</button>
+        <b>October 2026</b>
+        <button class="pgb">&rsaquo;</button>
+      </div>
+      <div class="calgrid">
+        <span class="dh">Mon</span>
+        <span class="dh">Tue</span>
+        <span class="dh">Wed</span>
+        <span class="dh">Thu</span>
+        <span class="dh">Fri</span>
+        <span class="dh">Sat</span>
+        <span class="dh">Sun</span>
+        <span class="dc off">31</span>
+        <span class="dc">1</span>
+        <span class="dc">2</span>
+          <span class="dc">3</span>
+          <span class="dc">4</span>
+          <span class="dc">5</span>
+          <span class="dc">6</span>
+          <span class="dc">7</span>
+          <span class="dc">8</span>
+          <span class="dc">9</span>
+          <span class="dc sel">10</span>
+          <span class="dc has">11</span>
+          <span class="dc has">12</span>
+          <span class="dc has">13</span>
+          <span class="dc">14</span>
+          <span class="dc">15</span>
+          <span class="dc">16</span>
+          <span class="dc">17</span>
+          <span class="dc">18</span>
+          <span class="dc">19</span>
+          <span class="dc">20</span>
+          <span class="dc">21</span>
+          <span class="dc">22</span>
+          <span class="dc">23</span>
+          <span class="dc">24</span>
+          <span class="dc">25</span>
+          <span class="dc">26</span>
+          <span class="dc">27</span>
+          <span class="dc">28</span>
+          <span class="dc">29</span>
+          <span class="dc">30</span>
+          <span class="dc off">1</span>
+          <span class="dc off">2</span>
+          <span class="dc off">3</span>
+          <span class="dc off">4</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <table id="t-pp">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Oct 10</td>
+            <td>5 gal Refill</td>
+            <td>1,000</td>
+            <td>
+              <span class="badge b-blue">Scheduled</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Oct 11</td>
+            <td>50 ml Bottled</td>
+            <td>500</td>
+            <td>
+              <span class="badge b-blue">Scheduled</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Oct 12</td>
+            <td>1 L Bottled</td>
+            <td>300</td>
+            <td>
+              <span class="badge b-warn">Pending</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Oct 13</td>
+            <td>5 gal Refill</td>
+            <td>800</td>
+            <td>
+              <span class="badge b-blue">Scheduled</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="pf" id="pf-5">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo; 
+      <b>Material Requirement</b>
+    </span>
+  </div>
+
+<div class="pagehead">
+  <div>
+    <h2>Material Requirement</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="toast('Material request generated')">+ Generate Request</button>
+  </div>
+</div>
+<div class="card" style="margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:14px 16px">
+  <span style="font-size:12px;color:var(--muted)">Request actions</span>
+  <select id="mrSelect" class="tsel" style="min-width:240px"></select>
+  <button class="btn primary" id="mrApprove">Approve</button>
+  <button class="btn" id="mrReject">Reject</button>
+</div>
+<div class="card">
+  <table id="t-mr">
+    <thead>
+      <tr>
+        <th>MR ID</th>
+        <th>Date</th>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="mono">MR-001</span>
+        </td>
+        <td>09/27/2026</td>
+        <td>5 gal Refill</td>
+        <td>200 pcs</td>
+        <td>
+          <span class="badge b-warn">Pending</span>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="mono">MR-002</span>
+        </td>
+        <td>09/27/2026</td>
+        <td>50 ml Bottled</td>
+        <td>1,000 pcs</td>
+        <td>
+          <span class="badge b-ok">Approved</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">MR-003</span>
+        </td>
+        <td>09/28/2026</td>
+        <td>1 L Bottled</td>
+        <td>500 pcs</td>
+        <td>
+          <span class="badge b-ok">Approved</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<div class="pf" id="pf-6">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo; 
+      <b>Material Issuance</b>
+    </span>
+  </div>
+
+<div class="pagehead">
+  <div>
+    <h2>Material Issuance</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="toast('Material issuance form opened')">+ Issue Materials</button>
+  </div>
+</div>
+<div class="card">
+  <table id="t-mi">
+    <thead>
+      <tr>
+        <th>Issue ID</th>
+        <th>Date</th>
+        <th>Material</th>
+        <th>Qty</th>
+        <th>Issued By</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="mono">ISS-001</span>
+        </td>
+        <td>09/27/2026</td>
+        <td>Purified Water</td>
+        <td>20 L</td>
+        <td>J. Santos</td>
+        <td>
+          <span class="badge b-ok">Issued</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">ISS-002</span>
+        </td>
+        <td>09/27/2026</td>
+        <td>Bottle Caps</td>
+        <td>1,000 pcs</td>
+        <td>M. Cruz</td>
+        <td>
+          <span class="badge b-ok">Issued</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">ISS-003</span>
+        </td>
+        <td>09/28/2026</td>
+        <td>Product Labels</td>
+        <td>1,000 pcs</td>
+        <td>A. Reyes</td>
+        <td>
+          <span class="badge b-ok">Issued</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="pf" id="pf-7">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo; 
+      <b>Production Monitoring</b>
+    </span>
+  </div>
+
+<div class="pagehead">
+  <div>
+    <h2>Production Monitoring</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <span class="badge b-ok livebadge">
+      <i class="livedot"></i>Live
+    </span>
+    </div>
+  </div>
+  <div class="card">
+
+ <div class="subtabs">
+  <button class="stab on" data-sp="a">Live Tracking</button>
+  <button class="stab" data-sp="b">Machine Status</button>
+  <button class="stab" data-sp="c">Order Progress</button>
+</div>
+
+ <div class="subpanel on" id="sp-a">
+  <div class="g3 grid">
+   <div class="card inner">
+    <div class="cardtitle">
+      <h3>PRO-0219 &middot; 5 gal Refill Water</h3>
+    </div>
+    <div class="ringwrap">
+      <div class="ring">
+        <div class="rhole">
+          <b>75%</b>
+        </div>
+      </div>
+      
+ <div class="rsteps">
+  <div><i class="sd done">
+
+  </i>Purifying <span class="ck">&#10003;</span>
+</div>
+<div>
+  <i class="sd done"></i>Filtering 
+  <span class="ck">&#10003;</span>
+</div>
+<div>
+  <i class="sd now"></i>Bottling
+</div>
+<div>
+  <i class="sd"></i>Labeling</div>
+</div>
+</div>
+</div>
+
+   <div class="card inner">
+    <div class="cardtitle">
+      <h3>Production Timeline</h3>
+    </div>
+    <div class="tl">
+
+ <div class="tli">
+  <span class="mono">09:00</span>
+  <span>Purifying</span>
+  <span class="badge b-ok">Completed</span>
+</div>
+
+ <div class="tli">
+  <span class="mono">10:20</span>
+  <span>Filtering</span>
+  <span class="badge b-ok">Completed</span>
+</div>
+
+ <div class="tli">
+  <span class="mono">11:10</span>
+  <span>Bottling</span>
+  <span class="badge b-blue">In Progress</span>
+</div>
+
+ <div class="tli">
+  <span class="mono">12:00</span>
+  <span>Labeling</span>
+  <span class="badge b-warn">Pending</span>
+</div>
+</div>
+</div>
+
+   <div class="card inner">
+    <div class="cardtitle">
+      <h3>Machine Status</h3>
+    </div>
+    <div class="mach">
+      <span class="mic ok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/>
+        </svg>
+      </span>
+      <b>Purifier</b>
+      <span class="badge b-ok">Online</span>
+    </div>
+    <div class="mach">
+      <span class="mic ok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/>
+        </svg>
+      </span>
+      <b>Filler</b>
+      <span class="badge b-ok">Online</span>
+    </div>
+    <div class="mach">
+      <span class="mic warn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/>
+        </svg>
+      </span>
+      <b>Labeler</b>
+      <span class="badge b-warn">Under Maintenance</span>
+    </div>
+  </div>
+ </div>
+</div>
+
+ <div class="subpanel" id="sp-b">
+  <table id="t-ms">
+    <thead>
+      <tr>
+        <th>Line</th>
+        <th>Equipment</th>
+        <th>Status</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Line A</td>
+        <td>Purifier</td>
+        <td>
+          <span class="badge b-ok">Online</span>
+        </td>
+        <td>
+          <small class="dim">98.2% yield</small>
+        </td>
+      </tr>
+      <tr>
+        <td>Line B</td>
+        <td>Filler</td>
+        <td>
+          <span class="badge b-ok">Online</span>
+        </td>
+        <td>
+          <small class="dim">On target</small>
+        </td>
+      </tr>
+      <tr>
+        <td>Line C</td>
+        <td>Labeler</td>
+        <td>
+          <span class="badge b-warn">Under Maintenance</span>
+        </td>
+        <td>
+          <small class="dim">Back in about 2 hrs</small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+ <div class="subpanel" id="sp-c">
+  <div class="grid g3">
+   <div class="card inner">
+    <div class="cardtitle">
+      <h3>PRO-0219</h3>
+      <span class="badge b-blue">Purifying</span>
+    </div>
+    <div style="font-size:13px;margin-bottom:10px">5 gal Refill Water</div>
+    <div class="progress">
+      <i style="width:75%"></i>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px">
+      <span class="mut">1,395 of 1,860</span>
+      <b>75%</b>
+    </div>
+  </div>
+
+   <div class="card inner">
+    <div class="cardtitle">
+      <h3>PRO-0220</h3>
+      <span class="badge b-blue">Bottling</span>
+    </div>
+    <div style="font-size:13px;margin-bottom:10px">50 ml Bottled (Cases)</div>
+    <div class="progress"><i style="width:41%">
+    </i>
+  </div>
+  <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px">
+    <span class="mut">82 of 200</span>
+    <b>41%</b>
+  </div>
+</div>
+
+   <div class="card inner">
+    <div class="cardtitle">
+      <h3>PRO-0221</h3>
+      <span class="badge b-warn">Waiting</span>
+    </div>
+    <div style="font-size:13px;margin-bottom:10px">5 gal Refill Water</div>
+    <div class="progress">
+      <i style="width:0%"></i>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px">
+      <span class="mut">0 of 900</span>
+      <b>0%</b>
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+</div>
+
+<div class="pf" id="pf-8">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo; 
+      <b>Finished Goods</b>
+    </span>
+  </div>
+
+<div class="pagehead">
+  <div>
+    <h2>Finished Goods</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="toast('Finished goods recorded to Inventory')">+ Record Finished Goods</button>
+  </div>
+</div>
+<div class="card">
+  <div class="fbar">
+    <div class="fsearch">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m20 20-3.5-3.5"/>
+      </svg>
+      <input class="tsearch" data-t="t-fg" placeholder="Search finished goods...">
+    </div>
+  </div>
+  <table id="t-fg">
+    <thead>
+      <tr>
+        <th>FG ID</th>
+        <th>Product</th>
+        <th>Qty</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="mono">FG-001</span>
+        </td>
+        <td>5 gal Refill</td>
+        <td>1,000</td>
+        <td>09/27/2026</td>
+        <td>
+          <span class="badge b-ok">In Stock</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">FG-002</span>
+        </td>
+        <td>50 ml Bottled</td>
+        <td>2,000</td>
+        <td>09/27/2026</td>
+        <td>
+          <span class="badge b-ok">In Stock</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">FG-003</span>
+        </td>
+        <td>1 L Bottled</td>
+        <td>1,500</td>
+        <td>09/28/2026</td>
+        <td>
+          <span class="badge b-ok">In Stock</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span class="mono">FG-004</span>
+        </td>
+        <td>5 gal Refill</td>
+        <td>800</td>
+        <td>09/29/2026</td>
+        <td>
+          <span class="badge b-warn">Low Stock</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<div class="pf" id="pf-9">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo; 
+      <b>Production Costing</b>
+    </span>
+  </div>
+
+<div class="pagehead">
+  <div>
+    <h2>Production Costing</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <button class="btn primary" onclick="toast('Cost calculation posted to Finance')">+ Calculate Cost</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="fbar">
+    <select class="tsel" data-t="t-pc" data-col="0"
+    ><option>All Products</option>
+    <option>5 gal Refill</option>
+    <option>50 ml Bottled</option>
+    <option>1 L Bottled</option>
+  </select>
+  <span class="daterange">Oct 01, 2026 &nbsp;&ndash;&nbsp; Oct 30, 2026</span>
+</div>
+<table id="t-pc">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Material Cost</th>
+      <th>Labor</th>
+      <th>Machine</th>
+      <th>Total Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5 gal Refill</td>
+      <td>&#8369;4.20</td>
+      <td>&#8369;1.50</td>
+      <td>&#8369;1.10</td>
+      <td>
+        <b>&#8369;6.80</b>
+      </td>
+    </tr>
+    <tr>
+      <td>50 ml Bottled</td>
+      <td>&#8369;2.10</td>
+      <td>&#8369;0.80</td>
+      <td>&#8369;0.60</td>
+      <td>
+        <b>&#8369;3.50</b>
+      </td>
+    </tr>
+    <tr>
+      <td>1 L Bottled</td>
+      <td>&#8369;3.00</td>
+      <td>&#8369;1.00</td>
+      <td>&#8369;0.90</td>
+      <td>
+        <b>&#8369;4.90</b>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="pf" id="pf-10">
+  <div class="pfbar">
+    <button class="btn" onclick="prodHome()">&#8592; Production</button>
+    <span class="pfcrumb">Production &amp; Manufacturing &rsaquo; 
+      <b>Production Reports</b>
+    </span>
+  </div>
+<div class="pagehead">
+  <div>
+    <h2>Production Reports</h2>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <span class="daterange">Sep 01, 2026 &nbsp;&ndash;&nbsp; Sep 30, 2026</span>
+    <button class="btn primary" onclick="toast('Report export queued')">&#8681; Export</button>
+  </div>
+</div>
+
+<div class="grid g4">
+  <div class="card repcard r-blue">
+  <div class="repic">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>
+    </svg>
+  </div>
+  <div>
+    <b>Production Summary</b>
+    <p>Overview of production output, units, and yield.</p>
+  </div>
+  <button class="btn viewbtn" onclick="toast('Production Summary opened')">View Report</button>
+</div>
+
+<div class="card repcard r-green">
+  <div class="repic">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 8 12 3 3 8v12h18V8Z"/>
+      <path d="m3 8 9 5 9-5M12 13v8"/>
+    </svg>
+  </div>
+  <div>
+    <b>Material Usage Report</b>
+    <p>Track material consumption per product.</p>
+  </div>
+  <button class="btn viewbtn" onclick="toast('Material Usage Report opened')">View Report</button>
+</div>
+<div class="card repcard r-purple">
+  <div class="repic">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"/>
+    </svg>
+  </div>
+  <div>
+    <b>Production Cost Report</b>
+    <p>Detailed cost per product and total expenses.</p>
+  </div>
+  <button class="btn viewbtn" onclick="toast('Production Cost Report opened')">View Report</button>
+</div>
+<div class="card repcard r-amber">
+  <div class="repic">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 7 12 3 4 7v10l8 4 8-4V7Z"/>
+      <path d="m9 12 2 2 4-4"/>
+    </svg>
+  </div>
+  <div>
+    <b>Finished Goods Report</b>
+    <p>Stock and inventory of completed products.</p>
+  </div>
+  <button class="btn viewbtn" onclick="toast('Finished Goods Report opened')">View Report</button>
+</div>
+</div>
+</div>
+  </section>
+
+  <!-- ======== SALES ======== -->
+  <section class="view" id="view-sales">
+    <div class="pagehead">
+      <div>
+        <h2>Sales &amp; Customer Management</h2>
+        <p>Team 4 module &middot; checks stock with Inventory, posts AR and collections to Finance</p>
+      </div>
+      <button class="btn primary" onclick="toast('New sales order drafted')">+ Sales Order</button>
+    </div>
+
+    <div class="grid g4" style="margin-bottom:16px">
+      <div class="card kpi"
+      ><div class="top">
+        <h3>Orders Today</h3>
+        <div class="ic blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2h9l5 5v15H6z"/>
+            <path d="M14 2v6h6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="val">57</div>
+      <span class="badge b-ok">4 deliveries out</span>
+    </div>
+
+      <div class="card kpi">
+        <div class="top">
+          <h3>Customers</h3>
+          <div class="ic green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="8" r="3.5"/>
+              <path d="M2.5 20c.7-3.4 3.4-5.5 6.5-5.5s5.8 2.1 6.5 5.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">312</div>
+        <span class="badge b-blue">41 on subscription</span>
+      </div>
+
+      <div class="card kpi">
+        <div class="top">
+          <h3>Receivables</h3>
+          <div class="ic red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <path d="M2 10h20"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">&#8369;42,300</div>
+        <span class="badge b-bad">6 overdue</span>
+      </div>
+
+      <div class="card kpi">
+        <div class="top">
+          <h3>Collected Today</h3>
+          <div class="ic purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">&#8369;15,900</div>
+        <span class="badge b-ok">cash + gcash</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardtitle">
+        <h3>Sales Orders &amp; Deliveries</h3>
+        <div>
+          <button class="btn" onclick="toast('Customer filter applied')">Filter</button>
+           <button class="btn primary" onclick="toast('Sales order SO-1339 created')">New Order</button>
+          </div>
+        </div>
+      <table>
+        <thead>
+          <tr>
+            <th>SO No.</th>
+            <th>Customer</th>
+            <th>Items</th>
+            <th>Amount</th>
+            <th>Stock Check</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">SO-1338</td>
+            <td>Brgy. San Roque HOA</td>
+            <td>120 &#215; 5-gal refill</td>
+            <td>&#8369;7,200</td>
+            <td>
+              <span class="badge b-warn">612 available</span>
+            </td>
+            <td>
+              <span class="badge b-blue">For Delivery</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">SO-1337</td>
+            <td>FitZone Gym</td>
+            <td>40 &#215; 5-gal refill</td>
+            <td>&#8369;2,400</td>
+            <td>
+              <span class="badge b-ok">Passed</span>
+            </td>
+            <td>
+              <span class="badge b-ok">Delivered</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">SO-1336</td>
+            <td>Mama Rosa Store</td>
+            <td>30 cases &#215; 500 mL</td>
+            <td>&#8369;4,050</td>
+            <td>
+              <span class="badge b-bad">Short 22 cases</span>
+            </td>
+            <td>
+              <span class="badge b-warn">Backorder</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono">SO-1335</td>
+            <td>JR Foodhaus</td>
+            <td>25 &#215; 5-gal refill</td>
+            <td>&#8369;1,500</td>
+            <td>
+              <span class="badge b-ok">Passed</span>
+            </td>
+            <td>
+              <span class="badge b-ok">Invoiced &middot; paid</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ======== FINANCE ======== -->
+  <section class="view" id="view-finance">
+    <div class="pagehead">
+      <div>
+        <h2>Accounting &amp; Finance</h2>
+        <p>Team 5 module &middot; consolidates AP from Purchases, AR from Sales, costs from Production</p>
+      </div>
+      <button class="btn primary" onclick="toast('Journal entry form opened')">+ Journal Entry</button>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:16px">
+      <div class="card kpi">
+        <div class="top">
+          <h3>Cash &amp; Bank</h3>
+          <div class="ic green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">&#8369;214,560</div>
+        <span class="badge b-ok">current balance</span>
+      </div>
+      <div class="card kpi">
+        <div class="top">
+          <h3>Receivables (AR)</h3>
+          <div class="ic blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 17l6-6 4 4 7-7"/>
+              <path d="M14 8h6v6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">&#8369;42,300</div>
+        <span class="badge b-warn">from Sales invoices</span>
+      </div>
+      <div class="card kpi">
+        <div class="top">
+          <h3>Payables (AP)</h3>
+          <div class="ic red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7l6 6 4-4 7 7"/>
+              <path d="M14 16h6v-6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">&#8369;51,750</div>
+        <span class="badge b-bad">from Purchase invoices</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardtitle">
+        <h3>General Journal &middot; Today</h3>
+        <a class="link">Trial balance</a>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>JE No.</th>
+            <th>Memo</th>
+            <th>Source Module</th>
+            <th>Debit</th>
+            <th>Credit</th
+              ></tr>
+            </thead>
+        <tbody>
+          <tr>
+            <td class="mono">JE-2210</td>
+            <td>Purchase invoice PI-0766 (AquaPure Bottles Inc.)</td>
+            <td>
+              <span class="badge b-blue">Procurement</span>
+            </td>
+            <td class="mono">&#8369;48,000</td>
+            <td class="mono">&#8369;48,000</td>
+          </tr>
+          <tr>
+            <td class="mono">JE-2211</td>
+            <td>Sales invoice INV-0912 (San Roque HOA)</td>
+            <td>
+              <span class="badge b-purple">Sales</span>
+            </td>
+            <td class="mono">&#8369;7,200</td>
+            <td class="mono">&#8369;7,200</td>
+          </tr>
+          <tr>
+            <td class="mono">JE-2212</td>
+            <td>Collection CRB-0433 (JR Foodhaus)</td>
+            <td>
+              <span class="badge b-purple">Sales</span>
+            </td>
+            <td class="mono">&#8369;1,500</td>
+            <td class="mono">&#8369;1,500</td>
+          </tr>
+          <tr>
+            <td class="mono">JE-2213</td>
+            <td>Production cost posting PRO-0219</td>
+            <td>
+              <span class="badge b-warn">Production</span>
+            </td>
+            <td class="mono">&#8369;18,228</td>
+            <td class="mono">&#8369;18,228</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ======== HR ======== -->
+  <section class="view" id="view-hr">
+    <div class="pagehead">
+      <div>
+        <h2>HR &amp; Payroll</h2>
+        <p>Team 5 module &middot; attendance, leave, government contributions, payroll</p>
+      </div>
+      <button class="btn primary" onclick="toast('Payroll run for Oct 2026 initialized')">Run Payroll</button>
+    </div>
+
+    <div class="grid g4" style="margin-bottom:16px">
+      <div class="card kpi">
+        <div class="top">
+          <h3>Employees</h3>
+          <div class="ic blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="8" r="3.5"/>
+              <path d="M2.5 20c.7-3.4 3.4-5.5 6.5-5.5s5.8 2.1 6.5 5.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">18</div>
+        <span class="badge b-blue">12 regular &middot; 6 part-time</span>
+      </div>
+      <div class="card kpi">
+        <div class="top">
+          <h3>Present Today</h3>
+          <div class="ic green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">15</div>
+        <span class="badge b-ok">2 on leave</span>
+      </div>
+      <div class="card kpi">
+        <div class="top">
+          <h3>Pending Leave</h3>
+          <div class="ic amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="17" rx="2"/>
+              <path d="M8 2v4M16 2v4M3 10h18"/>
+            </svg>
+          </div>
+        </div
+        ><div class="val">3</div>
+        <span class="badge b-warn">for approval</span>
+      </div>
+      <div class="card kpi">
+        <div class="top">
+          <h3>Next Payroll</h3>
+          <div class="ic purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="17" rx="2"/>
+              <path d="M3 10h18"/>
+            </svg>
+          </div>
+        </div>
+        <div class="val">Oct 15</div>
+        <span class="badge b-purple">semi-monthly</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cardtitle">
+        <h3>Payroll Summary &middot; September 2026</h3>
+        <span class="badge b-dim">Government contributions auto-computed</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b>Gross payroll</b>
+            </td>
+            <td class="mono">&#8369;186,400</td>
+            <td class="mut">18 employees</td>
+          </tr>
+          <tr>
+            <td>
+              <b>SSS contribution</b>
+            </td>
+            <td class="mono">&#8369;14,912</td>
+            <td class="mut">employer + employee share</td>
+          </tr>
+          <tr>
+            <td>
+              <b>PhilHealth</b>
+            </td>
+            <td class="mono">&#8369;5,592</td
+              ><td class="mut">2.5% of monthly basic</td>
+            </tr>
+          <tr>
+            <td>
+              <b>Pag-IBIG</b>
+            </td>
+            <td class="mono">&#8369;2,232</td>
+            <td class="mut">1.2% average rate</td>
+          </tr>
+          <tr>
+            <td>
+              <b>Net payroll</b>
+            </td>
+            <td class="mono" style="color:var(--ok)">&#8369;163,664</td>
+            <td class="mut">after deductions and withholding</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ======== REPORTS ======== -->
+  <section class="view" id="view-reports">
+    <div class="pagehead">
+      <div>
+        <h2>Reports &amp; Analytics</h2>
+        <p>Cross-module reporting from the single shared ERP database</p>
+      </div>
+    </div>
+    <div class="grid g3">
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Purchase Reports</h3>
+          <span class="badge b-blue">Team 1</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
+          <a class="link">Purchases by supplier</a>
+          <a class="link">PO status summary</a>
+          <a class="link">RFQ comparison sheet</a>
+          <a class="link">Supplier spend report</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Inventory Reports</h3>
+          <span class="badge b-blue">Team 2</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
+          <a class="link">Stock card history</a>
+          <a class="link">Movement report</a>
+          <a class="link">Reorder analysis</a>
+          <a class="link">Warehouse utilization</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Production Reports</h3>
+          <span class="badge b-blue">Team 3</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
+          <a class="link">Output per run</a>
+          <a class="link">Material usage variance</a>
+          <a class="link">Production costing summary</a>
+          <a class="link">Downtime log</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Sales Reports</h3>
+          <span class="badge b-blue">Team 4</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
+          <a class="link">Sales by customer</a>
+          <a class="link">AR aging report</a>
+          <a class="link">Backorder log</a>
+          <a class="link">Delivery performance</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardtitle">
+          <h3>Financial Statements</h3>
+          <span class="badge b-blue">Team 5</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
+          <a class="link">Trial balance</a>
+          <a class="link">Income statement</a>
+          <a class="link">Balance sheet</a>
+          <a class="link">Expense breakdown</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardtitle">
+          <h3>HR Reports</h3>
+          <span class="badge b-blue">Team 5</span>
+        </div
+        ><div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
+          <a class="link">Attendance summary</a><a class="link">Leave ledger</a>
+          <a class="link">Payroll register</a>
+          <a class="link">Contribution remittance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== AUDIT ======== -->
+  <section class="view" id="view-audit">
+    <div class="pagehead">
+      <div>
+        <h2>Audit Trail</h2>
+        <p>Every transaction across all five modules is logged with user, timestamp, and module</p>
+      </div>
+      <button class="btn" onclick="toast('Audit log exported as CSV')">Export CSV</button>
+    </div>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>User</th>
+            <th>Action</th>
+            <th>Module</th>
+            <th>Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">22:41</td>
+            <td>R. Dela Cruz</td>
+            <td>Created sales order</td>
+            <td>
+              <span class="badge b-purple">Sales</span>
+            </td>
+            <td class="mono">SO-1338</td>
+          </tr>
+          <tr>
+            <td class="mono">22:15</td>
+            <td>M. Santos</td>
+            <td>Posted collection receipt</td>
+            <td>
+              <span class="badge b-warn">Finance</span>
+            </td>
+            <td class="mono">CRB-0433</td>
+          </tr>
+          <tr>
+            <td class="mono">21:50</td>
+            <td>J. Reyes</td>
+            <td>Issued raw materials to production</td>
+            <td>
+              <span class="badge b-blue">Inventory</span>
+            </td>
+            <td class="mono">MI-0338</td>
+          </tr>
+          <tr>
+            <td class="mono">21:12</td>
+            <td>A. Lim</td>
+            <td>Confirmed goods receipt against PO</td>
+            <td>
+              <span class="badge b-green" style="background:rgba(52,211,153,.14);color:var(--ok)">Procurement</span>
+            </td>
+            <td class="mono">GRN-0871</td>
+          </tr>
+          <tr>
+            <td class="mono">20:34</td>
+            <td>System</td>
+            <td>Finished goods auto stock-in</td>
+            <td><span class="badge b-blue">Production</span>
+            </td>
+            <td class="mono">PRO-0219</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  </div>
+</main>
+</div>
+
+<div id="toast" style="position:fixed;
+bottom:24px;
+right:24px;
+background:#ffffff;
+border:1px solid rgba(14,165,233,.45);
+color:#17293f;
+padding:12px 18px;
+border-radius:12px;
+font-size:13px;
+box-shadow:0 8px 30px rgba(0,0,0,.45);
+opacity:0;
+transform:translateY(10px);
+transition:.25s;
+pointer-events:none;
+z-index:99">
+</div>
+
+<script>
+const titles={
+  dashboard:'Executive Dashboard',
+  procurement:'Procurement & Purchasing',
+  inventory:'Inventory & Warehouse',
+  production:'Production & Manufacturing',
+  sales:'Sales & Customer Management',
+  finance:'Accounting & Finance',
+  hr:'HR & Payroll',
+  reports:'Reports & Analytics',
+  audit:'Audit Trail'
+};
+
+document.querySelectorAll('.navitem').forEach(n=>n.addEventListener('click',()=>{
+  document.querySelectorAll('.navitem').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  n.classList.add('active');
+  const v=n.dataset.view;
+  document.getElementById('view-'+v).classList.add('active');
+  document.getElementById('crumbTitle').textContent=titles[v];
+  document.querySelector('.content').scrollTop=0;
+  if(v==='production')prodHome();
+}));
+
+/* ---- Production hub navigation ---- */
+const featureNames={
+  1:'Product Master',
+  2:'Bill of Materials (BOM)',
+  3:'Production Order',
+  4:'Production Planning',
+  5:'Material Requirement',
+  6:'Material Issuance',
+  7:'Production Monitoring',
+  8:'Finished Goods',
+  9:'Production Costing',
+  10:'Production Reports'
+};
+
+function prodHome(){
+  document.getElementById('prod-hub').style.display='';
+  document.querySelectorAll('.pf').forEach(x=>x.classList.remove('on'));
+  document.getElementById('crumbTitle').textContent=titles.production;
+  document.querySelector('.content').scrollTop=0;
+}
+
+function openFeature(n){
+  document.getElementById('prod-hub').style.display='none';
+  document.querySelectorAll('.pf').forEach(x=>x.classList.remove('on'));
+  document.getElementById('pf-'+n).classList.add('on');
+  document.getElementById('crumbTitle').textContent=featureNames[n];
+  document.querySelector('.content').scrollTop=0;
+}
+
+document.querySelectorAll('.stab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.stab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.subpanel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');document.getElementById('sp-'+b.dataset.sp).classList.add('on');
+}));
+
+function applyFilters(tid){
+  const q=(document.querySelector('.tsearch[data-t="'+tid+'"]')||{value:''}).value.toLowerCase();
+  const sel=document.querySelector('.tsel[data-t="'+tid+'"]');
+  const col=sel?+sel.dataset.col:-1, sv=sel&&sel.selectedIndex>0?sel.value.toLowerCase():'';
+  document.querySelectorAll('#'+tid+' tbody tr').forEach(r=>{
+    const okQ=!q||r.textContent.toLowerCase().includes(q);
+    const okS=!sv||r.children[col].textContent.toLowerCase().includes(sv);
+    r.style.display=(okQ&&okS)?'':'none';
+  });
+}
+
+document.querySelectorAll('.tsearch').forEach(i=>i.addEventListener('input',()=>applyFilters(i.dataset.t)));
+document.querySelectorAll('.tsel').forEach(s=>s.addEventListener('change',()=>applyFilters(s.dataset.t)));
+const htmlEl=document.documentElement;
+function setTheme(t){htmlEl.setAttribute('data-theme',t);document.getElementById('iconMoon').style.display=t==='dark'?'none':'';document.getElementById('iconSun').style.display=t==='dark'?'':'none';}
+document.getElementById('themeBtn').addEventListener('click',()=>setTheme(htmlEl.getAttribute('data-theme')==='dark'?'light':'dark'));
+let tt;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.style.opacity=1;t.style.transform='translateY(0)';clearTimeout(tt);tt=setTimeout(()=>{t.style.opacity=0;t.style.transform='translateY(10px)'},2600);}
+document.querySelector('.content').addEventListener('click',e=>{if(e.target.classList.contains('link'))toast('Detail view opens here in the full build');});
+</script>
+<!-- Production module backend glue (see ../server.js) -->
+<script src="production-api.js"></script>
+</body>
+</html>

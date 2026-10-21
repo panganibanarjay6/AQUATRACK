@@ -1,0 +1,14 @@
+# Runtime data — regenerated from seed.js on first run
+data.json
+
+# Dependencies (this project has none, but just in case)
+node_modules/
+
+# Secrets — never commit these
+.env
+.env.local
+client/config.js
+
+# OS junk
+Thumbs.db
+.DS_Store
