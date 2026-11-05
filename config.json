@@ -1,0 +1,6 @@
+{
+  "_readme": "Shared Supabase settings. The anon key is safe to publish. NEVER put the service_role key in this file - put it in .env instead.",
+  "SUPABASE_URL": "https://waugxbeavijuzgdduxhw.supabase.co",
+  "SUPABASE_ANON_KEY": "sb_publishable_d3U1B-VjKgBmxV4quF-VVg_4I5pWxpi",
+  "PORT": 4000
+}
