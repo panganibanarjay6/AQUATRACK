@@ -1,0 +1,11 @@
+# Database credentials
+aquamuna_procurement/includes/config.php
+
+# Temporary and test files
+test.php
+dbtest.php
+hash.php
+
+# Environment files
+.env
+.env.*
