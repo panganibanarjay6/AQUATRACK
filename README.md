@@ -228,24 +228,3 @@ cost from `cost_rates`. The standard cost table therefore reproduces the UI's nu
 | `production.material_issued` | inventory | each issuance line |
 | `production.finished_goods_recorded` | inventory | goods recorded (manual or auto on completion) |
 | `production.order_completed` | finance | order completed (with unit / total cost) |
-
-## Things I noticed while reviewing the UI
-
-1. **Two different unit costs.** The dashboard badge and `JE-2213` imply ₱9.80/gallon,
-   but the Production Costing screen (and this backend's BOM + rate data) gives **₱6.80**.
-   `18,228 / 1,860 = 9.80`, so the journal entry is the odd one out.
-2. **Product Master's "Price" column is really a cost.** 5-gal refill shows ₱9.80 while
-   Sales sells `SO-1338` at `7,200 / 120 = ₱60`. The column should be relabelled (cost)
-   or fed from Sales.
-3. **PRO-0219 disagrees with itself**: the order list says *Purifying*, Monitoring says
-   *Bottling*; progress is 64% in one place and 75% in another. The backend computes one
-   value from the stage list.
-4. **Quantities don't reconcile.** BOM says 20 L of treated water per 5-gal gallon, but
-   `ISS-001` issues only `20 L` for a 1,860-gallon run.
-5. **Broken HTML in the mock-up** (e.g. `</div` + newline + `>`, `<td class="mut">…<td>`,
-   `<th>Credit</th` … ) — browsers recover, but it is fragile to edit.
-6. **Placeholders everywhere.** Search boxes, Filter buttons, `.tag` counters (2, 3) and
-   the sidebar do nothing; the page date is hard-coded ("Sunday, Sep 27, 2026", the
-   calendar says October 2026).
-7. **Accessibility.** `.navitem`s are clickable `div`s — no `tabindex`, no `role`, no
-   keyboard support — and the icon-only buttons have no `aria-label`.
